@@ -16,6 +16,7 @@ export const MenuItem = (props: MenuItemProps) => {
       transition="0.2s background"
       _hover={{ bg: mode("gray.50", "gray.600") }}
       textAlign="left"
+      cursor="pointer"
     >
       <Text
         display="inline-block"
