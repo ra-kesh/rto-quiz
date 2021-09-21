@@ -17,31 +17,36 @@ export const useQuizData = () => {
   };
 
   const checkRightOrWrong = (item: any) => {
-    if (item.isCorrect && attempted === false) {
-      quizDispatch({ type: "SET_SCORE", payload: score + 10 });
+    if (attempted === false) {
+      if (item.isCorrect) {
+        quizDispatch({ type: "SET_SCORE", payload: score + 10 });
+      }
       quizDispatch({
         type: "SET_ATTEMPT",
         payload: true,
       });
     }
-    if (!isLastQuestion) {
-      quizDispatch({
-        type: "SET_QUESTION_NUMBER",
-        payload: questionNumber + 1,
-      });
-      quizDispatch({
-        type: "SET_ATTEMPT",
-        payload: false,
-      });
-    }
+  };
+
+  const goToNextQuestion = () => {
+    quizDispatch({
+      type: "SET_QUESTION_NUMBER",
+      payload: questionNumber + 1,
+    });
+    quizDispatch({
+      type: "SET_ATTEMPT",
+      payload: false,
+    });
   };
 
   return {
+    attempted,
     quizData,
     quizDispatch,
     loadQuiz,
     checkRightOrWrong,
     isLastQuestion,
     currentQuestion,
+    goToNextQuestion,
   };
 };
